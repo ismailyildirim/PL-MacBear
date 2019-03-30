@@ -19,6 +19,7 @@ switch:							{printf("SWITCH ");}
 case:							{printf("CASE ");}
 struct							{printf("STRUCT ");}
 except							{printf("EXCEPTION ");}
+return							{printf("RETURN ");}
 bool							{printf("BOOL ");}
 int								{printf("INTEGER ");}
 char							{printf("CHAR ");}

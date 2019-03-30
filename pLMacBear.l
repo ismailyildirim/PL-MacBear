@@ -32,6 +32,7 @@ void							{printf("VOID ");}
 while							{printf("WHILE ");}
 for								{printf("FOR ");}
 static							{printf("STATIC ");}
+public							{printf("PUBLIC ");}
 break							{printf("BREAK ");}
 continue						{printf("CONTINUE ");}
 pass							{printf("PASS ");}
@@ -80,7 +81,7 @@ import							{printf("INCLUDE ");}
 [a-zA-Z](?:[a-zA-Z0-9_])*		{printf("WORD ");}
 [0-9]*							{printf("NUMBER ");}
 .								{printf("UNKNOWN CHAR ");}
-<<EOF>>							{printf("\n"); yyterminate();}
+<<EOF>>							{printf("END_OF_FILE\n"); yyterminate();}
 %%
 
 

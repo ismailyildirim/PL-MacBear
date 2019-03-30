@@ -79,7 +79,7 @@ import							{printf("INCLUDE ");}
 " "								{printf("SPACE ");}
 [ \t]+							{/* ignore whitespace */;}
 [a-zA-Z](?:[a-zA-Z0-9_])*\(.*\)	{printf("FUNCTION ");}
-[a-zA-Z](?:[a-zA-Z0-9_])*		{printf("WORD ");}
+[a-zA-Z](?:[a-zA-Z0-9_])*		{printf("VARIABLE ");}
 [0-9]*							{printf("NUMBER ");}
 .								{printf("UNKNOWN CHAR ");}
 <<EOF>>							{printf("END_OF_FILE\n"); yyterminate();}

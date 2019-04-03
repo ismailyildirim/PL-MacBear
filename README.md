@@ -6,34 +6,48 @@ Ahmet İsmail Programming Language known as Artifical Intelligence Programming L
 ## Syntax
 
 ```
-<program> -> <class> | <stmt_list> | <function> 
+<program> ::= <class> | <stmt_list> | <function_list> 
 
-<class> -> public <class_name> {<stmt_list> | <function>} | <class_name> {<stmt_list> | <function>} 
+<class> ::= public <class_name> {<stmt_list> | <function_list>} | <class_name> {<stmt_list> | <function_list>} 
 
-<function> -> <return_type> <function_name>(<arg>){<stmt_list>}
+<function_list> ::= <function> | <function><function_list>
 
-<stmt_list> -> <stmt>; | <stmt>; <stmt_list> | <condition_list> <stmt_list> | <iteration> <stmt_list> 
+<function> ::= <return_type> <variable_name>(<arg>){<stmt_list>}
 
-<condition_list> -> <condition_start> | <condition_start> <condition_end>
+<stmt_list> ::= <stmt>; | <stmt>; <stmt_list> | <condition_list> <stmt_list> | <iteration> <stmt_list> 
 
-<condition_start> -> if(<condition>){<stmt_list>} | if(<condition>) ? <stmt> : <stmt>
+<condition_list> ::= <condition_start> | <condition_start> <condition_end_list> | if(<condition>) ? <stmt> : <stmt>
 
-<condition_end> -> else(<condition>){<stmt_list>} | else{<stmt_list>}
+<condition_start> ::= if(<condition>){<stmt_list>}
 
-<iteration> -> while(<condition>){<stmt_list>}
+<condition_end_list> ::= <condition_end> | <condition_end> <condition_end_list>
 
-<condition> -> <bool> | <var><cn_op><var> 
+<condition_end> ::= else(<condition>){<stmt_list>} | else{<stmt_list>}
 
-<bool> -> true | false
+<iteration> ::= while(<condition>){<stmt_list>}
 
-<cn_op> -> == | != | > | < | => | =<
+<condition> ::= <bool> | <var><cn_op><var> 
 
-<stmt> -> <var> = <expr> | <var><ar_op> | <function_name>(<arg>) | return <return_value>;
+<bool> ::= true | false
 
-<var> -> [a-zA-Z](?:[a-zA-Z0-9_])*
+<string> ::= ".*"
 
-<expr> -> <var> | <var> <ar_op> <var> | <function_name>(<arg>) 
+<integer> ::= [0-9]*
 
-<ar_op> -> + | - | * | / | += | -= | *= | /= | % | ++ | --
+<float> ::= [0-9]*\.[0-9]*
+
+<data> = <bool> | <string> | <integer> | <float> 
+
+<cn_op> ::= == | != | > | < | => | =<
+
+<stmt> ::= <var> = <expr> | <var><ar_op> | <variable_name>(<arg>) | return <var>;
+
+<var> ::= <variable_name> | <data>
+
+<variable_name> ::= [a-zA-Z](?:[a-zA-Z0-9_])*
+
+<expr> ::= <var> | <var> <ar_op> <var> | <variable_name>(<arg>) 
+
+<ar_op> ::= + | - | * | / | += | -= | *= | /= | % | ++ | -- | **
 
 ```

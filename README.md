@@ -1,9 +1,11 @@
-﻿#Programming-Languages-MacBear
+﻿# Programming-Languages-MacBear
 
-#Ahmet Gürdal / İsmail Yıldırım
+# Ahmet Gürdal / İsmail Yıldırım
 Ahmet İsmail Programming Language known as Artifical Intelligence Programming Language
 
-#Syntax
+## Syntax
+
+```
 <program> -> <class> | <stmt_list> | <function> 
 
 <class> -> public <class_name> {<stmt_list> | <function>} | <class_name> {<stmt_list> | <function>} 
@@ -34,5 +36,4 @@ Ahmet İsmail Programming Language known as Artifical Intelligence Programming L
 
 <ar_op> -> + | - | * | / | += | -= | *= | /= | % | ++ | --
 
-
-
+```

@@ -1,77 +1,44 @@
 %{
-#include <stdio.h>
+#include <stdlib.h>
+void yyerror(char *);
+#include "y.tab.h"
+extern int yylval;
 %}
 
 %%
-true							{printf("TRUE ");}
-false							{printf("FALSE ");}
-final							{printf("FINAL ");}
-print							{printf("PRINT ");}
-if							{printf("IF ");}
-elseif							{printf("ELSEIF ");}
-else							{printf("ELSE ");}
-input							{printf("INPUT ");}
-catch							{printf("EXCEPTION ");}
-return							{printf("RETURN ");}
-bool							{printf("BOOL ");}
-int							{printf("INTEGER ");}
-str							{printf("STRING ");}
-double							{printf("DOUBLE ");}
-float							{printf("FLOAT ");}
-enum							{printf("ENUM ");}
-unsigned						{printf("UNSIGNED ");}
-while							{printf("WHILE ");}
-static							{printf("STATIC ");}
-public							{printf("PUBLIC ");}
-break							{printf("BREAK ");}
-continue						{printf("CONTINUE ");}
-NULL							{printf("NULL ");}
-new							{printf("NEW ");}
-try							{printf("TRY ");}
-throw							{printf("THROW ");}
-class							{printf("CLASS ");}
-import							{printf("INCLUDE ");}
-.\n							{printf("NEW_LINE\n");}
-\?							{printf("THEN ");}
-\>							{printf("GREATER ");}
-\<							{printf("LESSTHAN ");}
-\=>							{printf("GREATERTHANEQUALS ");}
-\=<							{printf("LESSTHANEQUALS ");}
-\=							{printf("EQUALS ");}
-\==							{printf("ISEQUAL ");}
-\!=							{printf("NOTEQUALS ");}
-\&&							{printf("AND ");}
-\|\|							{printf("OR ");}
-\<=>							{printf("DOUBLEIMP ");}
-\<-!							{printf("COMMENT ");}
-\/\/							{printf("COMMENT ");}
-\"							{printf("QUOTE ");}
-\{							{printf("OBRACE ");}
-\}							{printf("EBRACE ");}
-\(							{printf("OBRACKET ");}
-\)							{printf("EBRACKET ");}
-;							{printf("SEMICOLUMN ");}
-\+							{printf("SUMMATION ");}
-\%							{printf("MODULUS ");}
-\++							{printf("INCREMENT ");}
-\--							{printf("DECREMENT ");}
-\*=							{printf("MULTIEQUAL ");}
-\/=							{printf("DIVEQUAL ");}
-\-							{printf("SUBSTRACTION ");}
-\*							{printf("MULTIPLICATION ");}
-\/							{printf("DIVISION ");}
-\\							{printf("ESCAPE ");}
-" "							{printf("SPACE ");}
-[ \t]+							{/* ignore whitespace */;}
-[a-zA-Z](?:[a-zA-Z0-9_])*\(.*\)	{printf("FUNCTION ");}
-[a-zA-Z](?:[a-zA-Z0-9_])*		{printf("VARIABLE ");}
-[0-9]*							{printf("NUMBER ");}
-.								{printf("UNKNOWN CHAR ");}
-<<EOF>>							{printf("END_OF_FILE\n"); yyterminate();}
+true                              {return TRUE;}
+false                             {return FALSE;}
+if                                  {return IF;}
+else                                {return ELSE;}
+print                               {return PRINT;}
+[a-zA-Z][a-zA-Z0-9_]*				{return VAR;}
+[0-9]+                              {yylval = atoi(yytext); return INT;}
+[0-9]+\.[0-9]{0,8}                  {yylval = atof(yytext); return FLOAT;}
+\=                                  {return ASSIGN;}
+\&\&                                {return AND;}
+\|\|                                {return OR;}
+\<                                  {return L;}
+\>                                  {return G;}
+\<\=                                {return LE;}
+\>\=                                {return GE;}
+\=\=                                {return EQ;}
+\!\=                                {return NE;}
+\+                                  {return INC;}                                      
+\-                                  {return DEC;}
+\*                                  {return MUL;}
+\/                                  {return DIV;}
+\%                                  {return MOD;}
+\!                                  {return NOT;}
+\(                                  {return OPARENT;}    
+\)                                  {return EPARENT;}
+\{                                  {return OBRACKET;}  
+\}                                  {return EBRACKET;}
+\?                                  {return COND;}
+\;                                  {return SC;}
+[ \t\n]                                /**/
+.                                   {printf("Invalid");}
 %%
 
-
-int yywrap(void){
-
-return 1;
+int yywrap(void) {
+ return 1;
 }

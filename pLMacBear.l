@@ -3,6 +3,7 @@
 void yyerror(char *);
 #include "y.tab.h"
 extern int yylval;
+extern char* yytext;
 %}
 
 %%
@@ -11,7 +12,7 @@ false                             {return FALSE;}
 if                                  {return IF;}
 else                                {return ELSE;}
 print                               {return PRINT;}
-[a-zA-Z][a-zA-Z0-9_]*				{return VAR;}
+[a-z]								{yylval = *yytext-'a'; return VAR;}
 [0-9]+                              {yylval = atoi(yytext); return INT;}
 [0-9]+\.[0-9]{0,8}                  {yylval = atof(yytext); return FLOAT;}
 \=                                  {return ASSIGN;}

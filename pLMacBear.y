@@ -3,10 +3,12 @@
 int yylex(void);
 void yyerror(char *);
 #include "y.tab.h"
+extern int yylval;
+int variables[26];
 %}
 
 %token VAR INT FLOAT ASSIGN SC
-%token AND OR 
+%token AND OR
 %token PRINT
 %token L G LE GE EQ NE
 %token OPARENT EPARENT 
@@ -24,20 +26,22 @@ void yyerror(char *);
 
 %%
 program:
-    program stmt program
+    stmt program
     |program conditionlist program
-    |
+    |stmt
     ;
 
+
+	
 stmt:
     PRINT OPARENT expr EPARENT SC           {printf("%d\n",$3);}
+	|PRINT OPARENT VAR EPARENT SC {printf("%d\n",variables[$3]);}
     |expr SC                                {}
-    |
+    |VAR ASSIGN expr SC			{variables[$1] = $3;}
     ;
 
 conditionlist:
     conditionbegin conditionelse conditionend
-
     ;
 
 conditionbegin:
@@ -80,6 +84,7 @@ condition:
 
 expr:
     INT {$$ = $1;}
+	|VAR {$$ = variables[$1];}
     |expr INC expr {$$ = $1 + $3;}
     |expr DEC expr {$$ = $1 - $3;}
     |expr MUL expr {$$ = $1 * $3;}
